@@ -1,0 +1,9 @@
+.article {
+    width: 800px;
+    height: fit-content;
+    background-color: lightgrey;
+    border: 1px solid black;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
