@@ -8,6 +8,8 @@ import "./Articles.css"
 function Articles() {
     const [blurArticle, setBlurArticle] = useState(null)
 
+    
+
     function toggleOpacity(id) {
         setBlurArticle(id)
     }
