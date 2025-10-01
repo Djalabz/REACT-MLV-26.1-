@@ -9,6 +9,7 @@ import Articles from "./Articles.jsx"
 import NoPage from "./NoPage.jsx"
 import API from "./API.jsx"
 import Pokedex from "./Pokedex.jsx"
+import Blog from "./Blog.jsx"
 
 // React Router 
 import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
@@ -27,7 +28,8 @@ function App() {
           <Link to="/counter">Counter</Link> |{" "}
           <Link to="/articles">Articles</Link> |{" "}
           <Link to="/api">API</Link> |{" "}
-          <Link to="/pokedex">Pokedex</Link>
+          <Link to="/pokedex">Pokedex</Link> |{" "}
+          <Link to="/blog">Blog</Link> |{" "}
         </nav>
 
         {/* Routes */}
@@ -38,6 +40,7 @@ function App() {
           <Route path="*" element={<NoPage />} />
           <Route path="/api" element={<API />} />
           <Route path="/pokedex" element={<Pokedex />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </BrowserRouter>
     </>

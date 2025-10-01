@@ -4,11 +4,12 @@ import { useState } from "react"
 
 import "./Articles.css"
 
+// Afficher depuis l'API JSON placeholder, 20 articles à la suite avec pour chacun 
+// le titre et le contenu 
+
 
 function Articles() {
     const [blurArticle, setBlurArticle] = useState(null)
-
-    
 
     function toggleOpacity(id) {
         setBlurArticle(id)
