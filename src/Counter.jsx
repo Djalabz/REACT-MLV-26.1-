@@ -24,6 +24,7 @@ function Counter() {
     // 3 - Le rendu, en JSX, du composant
     return (
         <>
+
             <h2>Compteur : {count}</h2>  
             <button
                 onClick={() => increment()}

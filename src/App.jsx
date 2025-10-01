@@ -7,6 +7,7 @@ import Home from "./Home.jsx"
 import Counter from "./Counter.jsx"
 import Articles from "./Articles.jsx"
 import NoPage from "./NoPage.jsx"
+import API from "./API.jsx"
 
 // React Router 
 import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
@@ -24,7 +25,7 @@ function App() {
           <Link to="/">Home</Link> |{" "}
           <Link to="/counter">Counter</Link> |{" "}
           <Link to="/articles">Articles</Link> |{" "}
-          {/* <Link to="/contact">Contact</Link> */}
+          <Link to="/api">API</Link>
         </nav>
 
         {/* Routes */}
@@ -33,7 +34,7 @@ function App() {
           <Route path="/articles" element={<Articles />} />
           <Route path="/counter" element={<Counter />}/>
           <Route path="*" element={<NoPage />} />
-          {/* <Route path="/contact" element={<Contact />} /> */}
+          <Route path="/api" element={<API />} />
         </Routes>
       </BrowserRouter>
     </>

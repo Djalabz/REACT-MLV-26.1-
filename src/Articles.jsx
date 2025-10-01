@@ -5,42 +5,26 @@ import { useState } from "react"
 import "./Articles.css"
 
 
-// Je veux que, lorsque je click sur un article, son opacité diminue de 50%.
-// Lorsque je reclick sur l'article l'opacité devient normale
-
 function Articles() {
-    const [opacity, setOpacity] = useState("1")
-    const [favs, setFavs] = useState([])
+    const [blurArticle, setBlurArticle] = useState(null)
 
-    console.log(favs)
-
-    // function changeOpacity(article, index) { 
-    //     let newIndex = index + 1
-    //     if (article.id == newIndex) {
-    //         if (opacity == 1) {
-    //             setOpacity("0.5")
-    //         } else {
-    //             setOpacity("1")
-    //         }
-    //     }   
-    // }
-
-    function addToFav(article) {
-        setFavs(favs => [...favs, article])
+    function toggleOpacity(id) {
+        setBlurArticle(id)
     }
 
     return ( 
+
     <>
         <h2>Les listes en React</h2>
 
         {/* Je fais des listes en React avec la méthode .map */}
-        { articles.map((article, index) => (
+        { articles.map((article) => (
             <div 
                 className='article' 
                 key={article.id} 
-                // onClick={() => changeOpacity(article, index)}
-                style={{ opacity: opacity }}
-                onClick={() => addToFav(article)}
+                // onClick={() => addToFav(article)}
+                onClick={() => toggleOpacity(article.id)}
+                style={{ opacity: blurArticle == article.id ? "50%" : "100%" }}
             >
                 <h3>{article.title}</h3>
                 <p>{article.content}</p>
@@ -52,3 +36,14 @@ function Articles() {
 }
 
 export default Articles;
+
+
+// const [blurArticle, setBlurArticle] = useState(null);
+
+
+// function toggleOpacity(articleId) {
+//     setBlurArticle(prev => (prev === articleId ? null : articleId));
+// }
+
+// onClick={() => toggleOpacity(article.id)}
+// style={{ opacity: blurArticle === article.id ? "50%" : "100%" }}
