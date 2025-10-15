@@ -10,6 +10,7 @@ import NoPage from "./NoPage.jsx"
 import API from "./API.jsx"
 import Pokedex from "./Pokedex.jsx"
 import Blog from "./Blog.jsx"
+import Quiz from './Quiz.jsx'
 
 // React Router 
 import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
@@ -30,6 +31,7 @@ function App() {
           <Link to="/api">API</Link> |{" "}
           <Link to="/pokedex">Pokedex</Link> |{" "}
           <Link to="/blog">Blog</Link> |{" "}
+          <Link to="/quiz">Quiz</Link> |{" "}
         </nav>
 
         {/* Routes */}
@@ -41,6 +43,7 @@ function App() {
           <Route path="/api" element={<API />} />
           <Route path="/pokedex" element={<Pokedex />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/quiz" element={<Quiz />} />
         </Routes>
       </BrowserRouter>
     </>
