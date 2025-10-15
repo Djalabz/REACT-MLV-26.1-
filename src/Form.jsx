@@ -15,13 +15,14 @@ function Form() {
     // Regex qui permet de vérifier si l'email est au bon format
     const regexEmail = new RegExp('[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+')
 
-    // Ici on envoit les infos finales du formulaire vers l'API
+    // Ici on envoit les infos finales du formulaire vers l'API en vue d'enregistrer les infos du user
     // useEffect(() => {
     //     axios.post("http://localhost:3000/signup")
     //     .then(data => console.log(data))
     //     .catch(err => console.log(err))
     // }, [formFinal])
 
+    // Fonction de vérification et nettoyage des infos 
     function checkFormData() {
         // On vient nettoyer / vérifier les infos du Form (mdp = confirmation, que le mail est bien un mail)
 
