@@ -1,28 +1,32 @@
 import { useState, useEffect } from "react"
 
 function API() {
-    // Le useEffect se place en haut comme le useState (généralement en dessous du useState)
+    const [input, setInput] = useState("")
+    const [message, setMessage] = useState("")
 
-    const [count, setCount] = useState(0)
-    
-    useEffect(
-        // Partie 1 du useEffect : la fonction
-        () => {console.log("effect")},
-
-        // Partie 2 : Le tableau de dépendance qui détermine quand notre effet se déclenche
-        // Si pas de tableau => L'effet se déclenche lors de tous les renders
-        // Si tableau vide => l'effet se déclenche lors du premier render
-        // Si tableau plein => l'effet se déclenche quand le state précisé dans le tableau change
-
-        [count])
+    useEffect(() => {
+        fetch("http://localhost:3000/message", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message : message })
+        })
+    }, [message])
 
     return ( 
     <>
         <h2>Première requete vers une API</h2>
-        <button onClick={() => setCount(prev => prev + 1)}>
-            +
-        </button>
-        <h3>State : {count}</h3>
+
+        <input 
+            type="text" 
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="votre message ici"
+        />
+
+        <button onClick={() => setMessage(input)}>Envoyer message</button>
+
     </>
     );
 }
