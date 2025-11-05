@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "./Form.css"
 
 // Faire form avec email, pseudo, mot de passe, confirmation mot de passe et un bouton de soumission
 // Je veux que toutes les infos renseignées par le user soit enregistrées dans un state 
@@ -9,28 +10,74 @@ function Form() {
     const [formData, setFormData] = useState({
         name: "",
         email : "",
-        password : ""
+        password : "",
+        confirm: ""
     })
+    const [formFinal, setFormFinal] = useState(null)
+    const [error, setError] = useState("")
     
     // Regex qui permet de vérifier si l'email est au bon format
     const regexEmail = new RegExp('[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+')
+    const regexName = new RegExp('^[a-z0-9_-]{3,15}$')
+    const regexPassword = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{4,}$')
 
     // Ici on envoit les infos finales du formulaire vers l'API en vue d'enregistrer les infos du user
-    // useEffect(() => {
-    //     axios.post("http://localhost:3000/signup")
-    //     .then(data => console.log(data))
-    //     .catch(err => console.log(err))
-    // }, [formFinal])
+    useEffect(() => {
+        
+        axios.post("http://localhost:3000/user/signup", formFinal)
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+
+    }, [formFinal])
 
     // Fonction de vérification et nettoyage des infos 
     function checkFormData() {
         // On vient nettoyer / vérifier les infos du Form (mdp = confirmation, que le mail est bien un mail)
 
-        // On viendrait ensuite enregistrer un nouveau state qui pourrait etre formFinal 
+        // Username 
+        // Limiter le nbre de caractères (max 20 par exemple)
+        // Echapper certains caractères spéciaux potentiellement problématiques : @,;,",', `, les <>
+        if (regexName.test(formData.name)) {
+            if (regexPassword.test(formData.password)) {
+                if (formData.password === formData.confirm) {
+                    if (regexEmail.test(formData.email)) {
+
+                        /// METTRE A JOUR LE STATE POUR formFinal
+                        let finalForm = {
+                            name: formData.name,
+                            email: formData.email,
+                            password: formData.password
+                        }
+
+                        setFormFinal(finalForm)
+
+                    } else {
+                        setError("Le format de l'email n'est pas bon ")
+                    }
+                } else {
+                    setError("Les passwords sont différents")
+                }
+            }
+            else {
+                setError("Le password n'est pas au bon format")
+            }
+        } else {
+            setError("Seulement des minuscules, chiffre et -, _ sont autorisé pour le username")
+        }
+
+
+        // Email -> on check si il a un bon format grace aux REGEX (I hate REGEX)
+        
+        // Le Password 
+        // -> On vérifiera que les mdp correspondent 
+        // -> 12 car, 1 majuscule, 1 minuscule, un chiffre, un caractère spécial 
+
+        // On viendrait ensuite enregistrer le tout dans un nouveau state qui pourrait etre formFinal 
     }
 
-    console.log(formData)
+    console.log("formData : " + formData)
     console.log(regexEmail.test(formData.email))
+    console.log("formFinal : " + formFinal)
 
     return ( 
     <>
@@ -60,7 +107,18 @@ function Form() {
             onChange={(e) => setFormData({ ... formData, password : e.target.value })}
         />
 
+        <input 
+            type="password" 
+            placeholder="Confirmer le password"
+            name="confirm"
+            value={formData.confirm}
+            onChange={(e) => setFormData({ ... formData, confirm : e.target.value })}
+        />
+
         <button onClick={() => checkFormData()}>Envoyer Form</button>
+
+        { error ? <h3 className="error">{error}</h3> : null }
+
     </>
     );
 }

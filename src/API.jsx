@@ -5,13 +5,17 @@ function API() {
     const [message, setMessage] = useState("")
 
     useEffect(() => {
-        fetch("http://localhost:3000/message", {
+        fetch("http://localhost:3000/search", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                
             },
             body: JSON.stringify({ message : message })
         })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
     }, [message])
 
     return ( 
@@ -28,7 +32,7 @@ function API() {
         <button onClick={() => setMessage(input)}>Envoyer message</button>
 
     </>
-    );
+    )
 }
 
 export default API;
