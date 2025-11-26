@@ -23,7 +23,7 @@ function Form() {
 
     // Ici on envoit les infos finales du formulaire vers l'API en vue d'enregistrer les infos du user
     useEffect(() => {
-        
+
         axios.post("http://localhost:3000/user/signup", formFinal)
         .then(data => console.log(data))
         .catch(err => console.log(err))
@@ -64,23 +64,14 @@ function Form() {
         } else {
             setError("Seulement des minuscules, chiffre et -, _ sont autorisé pour le username")
         }
-
-
-        // Email -> on check si il a un bon format grace aux REGEX (I hate REGEX)
-        
-        // Le Password 
-        // -> On vérifiera que les mdp correspondent 
-        // -> 12 car, 1 majuscule, 1 minuscule, un chiffre, un caractère spécial 
-
-        // On viendrait ensuite enregistrer le tout dans un nouveau state qui pourrait etre formFinal 
     }
 
-    console.log("formData : " + formData)
-    console.log(regexEmail.test(formData.email))
+    // console.log("formData : " + formData)
+    // console.log(regexEmail.test(formData.email))
     console.log("formFinal : " + formFinal)
 
     return ( 
-    <>
+    <div className="signupForm">
         <h2>Formulaire de Signup</h2>
 
         <input 
@@ -119,7 +110,7 @@ function Form() {
 
         { error ? <h3 className="error">{error}</h3> : null }
 
-    </>
+    </div>
     );
 }
 

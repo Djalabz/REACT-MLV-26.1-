@@ -11,6 +11,8 @@ import API from "./API.jsx"
 import Pokedex from "./Pokedex.jsx"
 import Blog from "./Blog.jsx"
 import Quiz from './Quiz.jsx'
+import Login from './Login.jsx'
+import Form from './Form.jsx'
 
 // React Router 
 import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
@@ -36,7 +38,8 @@ function App() {
 
         {/* Routes */}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Form />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/counter" element={<Counter />}/>
           <Route path="*" element={<NoPage />} />

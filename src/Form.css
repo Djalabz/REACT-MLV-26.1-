@@ -1,3 +1,16 @@
 .error {
     color: brown;
 }
+
+.signupForm, .loginForm {
+    margin: auto;
+    display: grid;
+    width: 400px;
+}
+
+.signupForm input, .signupForm button, .loginForm input, .loginForm button {
+    margin: 6px 0;
+    padding: 5px 4px;
+    border-radius: 8px;
+    border: solid 1px grey;
+}
